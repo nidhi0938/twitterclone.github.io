@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Twitter Clone - Final</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  --twitter-color: #50b7f5;
+  --twitter-background: #e6ecf0;
+}
+
+.sidebarOption {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sidebarOption .material-icons,
+.fa-twitter {
+  padding: 20px;
+}
+
+.sidebarOption h2 {
+  font-weight: 800;
+  font-size: 20px;
+  margin-right: 20px;
+}
+
+.sidebarOption:hover {
+  background-color: var(--twitter-background);
+  border-radius: 30px;
+  color: var(--twitter-color);
+  transition: color 100ms ease-out;
+}
+
+.sidebarOption.active {
+  color: var(--twitter-color);
+}
+
+.sidebar__tweet {
+  width: 100%;
+  background-color: var(--twitter-color);
+  border: none;
+  color: white;
+  font-weight: 900;
+  border-radius: 30px;
+  height: 50px;
+  margin-top: 20px;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 10px;
+}
+
+.sidebar {
+  border-right: 1px solid var(--twitter-background);
+  flex: 0.2;
+
+  min-width: 250px;
+  margin-top: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.fa-twitter {
+  color: var(--twitter-color);
+  font-size: 30px;
+}
+
+/* feed */
+.feed {
+  flex: 0.5;
+  border-right: 1px solid var(--twitter-background);
+  min-width: fit-content;
+  overflow-y: scroll;
+}
+
+.feed__header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  border: 1px solid var(--twitter-background);
+  padding: 15px 20px;
+}
+
+.feed__header h2 {
+  font-size: 20px;
+  font-weight: 800;
+  text-decoration-color: #50b7f5;
+}
+
+.feed::-webkit-scrollbar {
+  display: none;
+}
+
+.feed {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* tweet box */
+.messageSender {
+  display: flex;
+  margin-top: 30px;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+  width: 100%;
+}
+
+.messageSender__top {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eff2f5;
+  padding: 5px;
+}
+
+.messageSender__top form {
+  flex: 1;
+  display: flex;
+}
+
+.messageSender__top form input {
+  flex: 1;
+  outline-width: 0;
+  border: none;
+  padding: 20px 25px;
+  margin: 0 10px;
+  border-radius: 999px;
+  background-color: #eff2f5;
+}
+
+
+.messageSender__bottom {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.submittedTweet__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid var(--twitter-color);
+    background-color: var(--twitter-background);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.deleteButton {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.deleteButton:hover {
+    color: darkred;
+}
+
+.box{
+  width: 20%;
+  background-color: var(--twitter-color);
+  border: none;
+  color: white;
+  font-weight: 900;
+  border-radius: 30px;
+  height: 50px;
+  margin-top: 20px;
+
+}
+
+.messageSender__option {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  color: gray;
+  margin: 5px;
+}
+
+.messageSender__option h3 {
+  font-size: medium;
+  margin-left: 10px;
+  text-decoration: solid;
+}
+
+.messageSender__option:hover {
+  cursor: pointer;
+  background-color: #eff2f5;
+  border-radius: 20px;
+}
+
+
+
+/* post */
+.post__avatar img {
+  border-radius: 60%;
+  height: 50px;
+}
+
+.post {
+  display: flex;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--twitter-background);
+  padding-bottom: 10px;
+}
+
+.post__body img {
+  width: 450px;
+  object-fit: contain;
+  border-radius: 20px;
+  height: 400px;
+}
+
+.post__footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.post__badge {
+  font-size: 14px !important;
+  color: var(--twitter-color);
+  margin-right: 5px;
+}
+
+.post__headerSpecial {
+  font-weight: 600;
+  font-size: 12px;
+  color: gray;
+}
+
+.post__headerText h3 {
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.post__headerDescription {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+#btn {
+      font-size: 20px;
+      transition: .4s;
+    }
+    i:hover {
+      color: rgb(182, 53, 66);
+    }
+    .fas{
+      color: rgb(216, 45, 74);
+      transition: .4s;
+    }
+
+
+.post__body {
+  flex: 1;
+  padding: 10px;
+}
+
+.post__avatar {
+  padding: 20px;
+}
+
+/* widgets */
+.search-s2{
+  width: 400px;
+  position: fixed;
+  top: 20px;
+  padding-left: 20px;
+}
+.search-s2 input{
+  width: 300px;
+  height: 40px;
+  background-color: rgba(236, 240, 243, 0.637);
+  border-radius: 30px;
+  border: .5px solid gray;
+  border: none;
+  padding-left: 50px;
+/* position: fixed; */
+
+}
+.trends-for-u{
+  margin-top: 35px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: #f5f8fa;
+  border-radius: 20px;
+  margin-bottom: auto;
+}
+.trend-topic{
+  /* font-weight: bold; */
+  font-size: 30px;
+}
+a{
+  text-decoration: none;
+}
+.who-to-follow{
+  margin-top: -0.5px;
+  margin-left: 20px;
+  padding: 20px;
+  background-color: #f5f8fa;
+  border-radius: 20px;
+  margin-top: 1%;
+}
+    </style>
+  </head>
+  <body>
+    <!-- sidebar starts -->
+    <div class="sidebar">
+      <i class="fab fa-twitter"></i>
+      <div class="sidebarOption active">
+        <span class="material-icons"> home </span>
+        <h2>Home</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> search </span>
+        <h2>Explore</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> notifications_none </span>
+        <h2>Notifications</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> mail_outline </span>
+        <h2>Messages</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> bookmark_border </span>
+        <h2>Bookmarks</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> list_alt </span>
+        <h2>Lists</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> perm_identity </span>
+        <h2>Profile</h2>
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> more_horiz </span>
+        <h2>More</h2>
+      </div>
+      <button class="sidebar__tweet">Tweet</button>
+    </div>
+    <!-- sidebar ends -->
+
+    <!-- feed starts -->
+    <div class="feed">
+      <div class="feed__header">
+        <h2>Home</h2>
+      </div>
+
+      <!-- message sender starts -->
+      <div class="messageSender">
+        <div class="messageSender__top">
+          <div class="post__avatar img">
+            <img
+              src="https://tse2.mm.bing.net/th?id=OIP.HfXtvnZ8YoT0b3elURJaKgHaHx&pid=Api&P=0&h=180"
+              alt="">
+          </div>
+          <form>
+            <input class="messageSender__input" placeholder="What's on your mind? u can write it here" type="text" />
+          </form>
+          <button class="box">Tweet</button>
+        </div>
+        <div id="submittedTweet" style="margin-top: 10px;"></div>
+
+        <div class="messageSender__bottom">
+          <div class="messageSender__option">
+            <span style="color: rgb(0, 179, 255)" class="material-icons"> videocam </span>
+            <h3>Video</h3>
+          </div>
+
+          <div class="messageSender__option">
+            <span style="color: green" class="material-icons"> photo_library </span>
+            <h3>Photo</h3>
+          </div>
+
+          <div class="messageSender__option">
+            <span style="color: rgb(45, 24, 81)" class="material-icons"></span>
+            <i class='bx bx-location-plus' style="font-size: 20px;"></i>
+            <h3>location</h3>
+          </div>
+
+          <div class="messageSender__option">
+            <span style="color: orange" class="material-icons"> insert_emoticon </span>
+            <h3>Feeling</h3>
+          </div>
+        </div>
+      </div>
+      <!-- message sender ends -->
+      
+
+      <!-- post starts -->
+      <div class="post">
+        <div class="post__avatar">
+          <img
+            src="https://tse2.mm.bing.net/th?id=OIP.HfXtvnZ8YoT0b3elURJaKgHaHx&pid=Api&P=0&h=180"
+            alt=""
+          />
+        </div>
+
+        <div class="post__body">
+          <div class="post__header">
+            <div class="post__headerText">
+              <h3>
+                Nishant loomba
+                <span class="post__headerSpecial"
+                  ><span class="material-icons post__badge"> verified </span>@nishant</span
+                >
+              </h3>
+            </div>
+            <div class="post__headerDescription">
+              <p>Guys this is the reality check of life.</p>
+            </div>
+          </div>
+          <img
+            src="https://cache.lovethispic.com/uploaded_images/375169-Karma-Says.jpg"
+            alt=""
+          />
+          <div class="post__footer">
+            <span class="material-icons"> repeat </span>
+            <i onclick="Toggle1()" id="btn1" class="far fa-heart"></i>
+            <span class="material-icons"> publish </span>
+          </div>
+        </div>
+      </div>
+      <!-- post ends -->
+
+      <!-- post starts -->
+      <div class="post">
+        <div class="post__avatar">
+          <img
+            src="https://tse1.mm.bing.net/th?id=OIP.NHIFqwS7wDOH83DMRrZf1wHaHZ&pid=Api&P=0&h=180"
+            alt=""
+          />
+        </div>
+
+        <div class="post__body">
+          <div class="post__header">
+            <div class="post__headerText">
+              <h3>
+                Nidhi singh
+                <span class="post__headerSpecial"
+                  ><span class="material-icons post__badge"> verified </span>@nidhi122003</span
+                >
+              </h3>
+            </div>
+            <div class="post__headerDescription">
+              <p>Friendship is something that teach us lesson of togetherness .</p>
+            </div>
+          </div>
+          <img
+            src="https://www.theholidayspot.com/friendship/wallpapers/new/friendship-wallpaper-07.jpg"
+            alt=""
+          />
+          <div class="post__footer">
+            <span class="material-icons"> repeat </span>
+            <i onclick="Toggle2()" id="btn2" class="far fa-heart"></i>
+            <span class="material-icons"> publish </span>
+          </div>
+        </div>
+      </div>
+      <!-- post ends -->
+
+      <!-- post starts -->
+      <div class="post">
+        <div class="post__avatar">
+          <img
+            src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
+            alt=""
+          />
+        </div>
+
+        <div class="post__body">
+          <div class="post__header">
+            <div class="post__headerText">
+              <h3>
+                khushi Garg
+                <span class="post__headerSpecial"
+                  ><span class="material-icons post__badge"> verified </span>@khushigarg</span
+                >
+              </h3>
+            </div>
+            <div class="post__headerDescription">
+              <p>Just living is not enough...one must should sunshine ,freedom and little flower .</p>
+            </div>
+          </div>
+          <video width="520" height="240" controls
+            src="https://player.vimeo.com/external/342177837.sd.mp4?s=d3d03805e3c00a503ddc6b1832b2219de7eba472&profile_id=164&oauth2_token_id=57447761"></video>
+          <div class="post__footer">
+            <span class="material-icons"> repeat </span>
+            <i onclick="Toggle3()" id="btn3" class="far fa-heart"></i>
+            <span class="material-icons"> publish </span>
+          </div>
+        </div>
+      </div>
+      <!-- post ends -->
+
+            <!-- post starts -->
+            <div class="post">
+              <div class="post__avatar">
+                <img
+                  src="https://tse1.mm.bing.net/th?id=OIP.5JLM9njB9uJr5n1_p0nKFAHaHa&pid=Api&P=0&h=180"
+                  alt=""
+                />
+              </div>
+      
+              <div class="post__body">
+                <div class="post__header">
+                  <div class="post__headerText">
+                    <h3>
+                      khushi Aggarwal
+                      <span class="post__headerSpecial"
+                        ><span class="material-icons post__badge"> verified </span>@khushiaggarwal</span
+                      >
+                    </h3>
+                  </div>
+                  <div class="post__headerDescription">
+                    <p>Travelling is something ur good at its something you do like breathing.</p>
+                  </div>
+                </div>
+                <video width="520" height="240" controls
+                  src="https://player.vimeo.com/external/363628453.sd.mp4?s=6756013c6abcf0f0945b27acceb6c90e2247bded&profile_id=164&oauth2_token_id=57447761"></video>
+                <div class="post__footer">
+                  <span class="material-icons"> repeat </span>
+                  <i onclick="Toggle4()" id="btn4" class="far fa-heart"></i>
+                  <span class="material-icons"> publish </span>
+                </div>
+              </div>
+            </div>
+            <!-- post ends -->
+    </div>
+    <!-- feed ends -->
+
+    <!-- widgets starts -->
+    <div class="sidebar2">
+        <div class="search-s2">
+          <input type="text" placeholder="Search...">
+        </div>
+
+        <div class="trends-for-u">
+<h3 style="text-align: left;padding-top: 10px;padding-left: 10px;">Trends for you</h3>
+
+<a href="https://r.search.yahoo.com/_ylt=AwrPrFO1k.tk_bkEcH27HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Nj/RV=2/RE=1693189173/RO=10/RU=https%3a%2f%2fwww.koimoi.com%2ftelevision%2fis-bigg-boss-ott-2-winner-elvish-yadav-entering-salman-khans-show-as-a-contestant-youtube-sensation-asks-fans-kya-karna-chahiye-agar-bigg-boss-17-mere-pass-aata-hai-toh%2f/RK=2/RS=36hQl2chTXtNvpkd2qI7hg0kmEE-" class="trend-topic" style="font-size: 17px;"><span style="font-weight:1px;font-size: 11px;">Elvish Yadav</span><br>  <span style="font-weight: bold;"> #Bigg boss OTT-2 Winner</span></a><br>
+
+<a href="https://r.search.yahoo.com/_ylt=AwrPrFMDlOtkXlEEQtK7HAx.;_ylu=Y29sbwNzZzMEcG9zAzIEdnRpZAMEc2VjA3Ny/RV=2/RE=1693189252/RO=10/RU=https%3a%2f%2fwww.youtube.com%2fwatch%3fv%3dKM-e09Drc5I/RK=2/RS=3nLIlJ68diJmXjrKtmiZJtrBTsg-" class="trend-topic" style="font-size: 19px;"><span style="font-weight:1px;font-size: 11px;">BTS .Trending</span><br><span style="font-weight: bold;"> #band reunion in 2025</span><span style="font-size: 10px;">11.4k Tweeks</span></a><br>
+
+<a href="https://r.search.yahoo.com/_ylt=Awr1TSNQlOtkwpMDdnG7HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Ny/RV=2/RE=1693189328/RO=10/RU=https%3a%2f%2ftimesofindia.indiatimes.com%2fsports/RK=2/RS=OFitU645oWSCdWUgyRVM8R0DE2s-" class="trend-topic" style="font-size: 16px;"><span style="font-weight:1px;font-size: 11px;">Sports .Trending</span><br><span style="font-weight: bold;"> #IND VS AUS</span><span style="font-size: 10px;">20.9k Tweeks</span></a><br>
+
+<a href="https://r.search.yahoo.com/_ylt=AwrPqlB2UOdkXEQTnOC7HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Nj/RV=2/RE=1692909815/RO=10/RU=https%3a%2f%2fwww.business-standard.com%2findia-news%2fchandrayaan-3-breaks-records-becomes-world-s-most-viewed-live-stream-123082400393_1.html/RK=2/RS=TmZGjOSvYKnb5a0qULQaKgBho5U-" class="trend-topic" style="font-size: 16px;"><span style="font-weight:1px;font-size: 11px;">Trendings  on INDIA</span><br>  <span style="font-weight: bold;"> #Chandrayaan-3 breaks records</span><span style="font-size: 10px;">4.1k Tweeks</span></a><br>
+
+<a href="https://r.search.yahoo.com/_ylt=AwrKGD4LmexkN0MqPwi7HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Ny/RV=2/RE=1693256075/RO=10/RU=https%3a%2f%2fwww.livemint.com%2findustry%2fmedia%2fdream-girl-2-box-office-collections-day-3-ayushmann-khurrana-s-movie-continues-strong-streak-with-impressive-numbers-11693191213993.html/RK=2/RS=wonxb_oX06YiFU59nNk8Kq1kDjo-" class="trend-topic" style="font-size: 18px;"><span style="font-weight:1px;font-size: 11px;">Bollywood world</span><br>  <span style="font-weight: bold;"> #Dreamgirl</span><span style="font-size: 10px;">11.2k Tweeks</span></a><br>
+
+<a href="https://in.video.search.yahoo.com/search/video;_ylt=AwrKAnw7k.xksLkWpZi7HAx.;_ylu=Y29sbwNzZzMEcG9zAzEEdnRpZAMEc2VjA3Nj?p=k-pop+music&type=E211IN826G0&ei=UTF-8&fr=mcafee&turl=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOVP.MWuMwHYwnWcH76xa6h9z1wEsDh%26pid%3DApi%26w%3D296%26h%3D156%26c%3D7%26p%3D0&rurl=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DPOe9SOEKotk&tit=BLACKPINK+-+%E2%80%98Shut+Down%E2%80%99+M%2FV&pos=1&vid=ca476264c0e3b2de594d712bccc0be9d&sigr=X3dxOnyHrPxq&sigt=_iTYqVM.NMOH&sigi=8YumEDbFBptf" class="trend-topic" style="font-size: 16px;"><span style="font-weight:1px;font-size: 11px;">K-POP .Music</span><br>  <span style="font-weight: bold;"> #BTSJIN</span><span style="font-size: 10px;">55.6k Tweeks</span></a><br>
+
+<a href="" style="color: #00acee;font-size: 18px;" class="btn-show-more">Show more</a>
+
+        </div>
+
+        <div class="who-to-follow">
+          <h3 style="text-align: leftr;padding-top: 20px;padding-left: 20px;">Who to follow</h3>
+          
+          <a href="" class="trend-topic" style="font-size: 14px;">
+          
+          <table>
+            <td><img src="https://tse1.mm.bing.net/th?id=OIP.NHIFqwS7wDOH83DMRrZf1wHaHZ&pid=Api&P=0&h=180"
+               alt="" style="width: 40px; height: 40px;border-radius: 50%;"></td>
+
+              <td> <span style="font-weight: bold;">&nbsp&nbsp   #Nidhi</span><br><span style="font-weight:1px;font-size: 11px;">&nbsp&nbsp&nbsp&nbspNice to meet you</span> </td>
+
+              <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                <button id="btn-who-to-follow">follow</button>
+              </td>
+          </table></a>
+          
+          <a href="" class="trend-topic" style="font-size: 14px;">
+          
+            <table>
+              <td><img src="https://tse2.mm.bing.net/th?id=OIP.HfXtvnZ8YoT0b3elURJaKgHaHx&pid=Api&P=0&h=180"
+                 alt="" style="width: 40px; height: 40px;border-radius: 50%;"></td>
+  
+                <td><span style="font-weight: bold;">&nbsp&nbsp   #Nishant</span><i class="fa-solid fa-badge-check"></i><br> <span style="font-weight:1px;font-size: 11px;">&nbsp&nbsp&nbsp&nbsp&nbspSoftware Engineer </span> </td>
+  
+                <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                  <button id="btn-who-to-follow">follow</button>
+                </td>
+            </table></a>
+          
+            <a href="" class="trend-topic" style="font-size: 14px;">
+          
+              <table>
+                <td><img src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
+                   alt="" style="width: 40px; height: 40px;border-radius: 50%;"></td>
+    
+                  <td><span style="font-weight: bold;">&nbsp&nbsp   #Khushi</span> <br><span style="font-weight:1px;font-size: 11px;">&nbsp&nbsp&nbsp&nbspI am the best</span>  </td>
+    
+                  <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                    <button id="btn-who-to-follow">follow</button>
+                  </td>
+              </table></a>
+          
+          
+          <a href="" style="color: #00acee;font-size: 14px;" class="btn-show-more">Show more</a>
+          
+                  </div>
+<br>
+                  <footer>
+                    <a id="footer-links" href="#" style="font-size: 10  px;"><center>Terms of  Service</center></a>
+                    <a id="footer-links" href="#" style="font-size: 10  px;"><center>Privacy policy</center></a>
+                    <a id="footer-links" href="#" style="font-size: 10  px;"> <center>Cookie Policy</center></a><br>
+                    <br>
+                    <a id="footer-links" href="#" style="font-size: 10  px;"> Accessibility</a>
+                    <a id="footer-links" href="#" style="font-size: 10  px;"> Ads info</a>
+                    <a id="footer-links" href="#" style="font-size: 10  px;"> More...</a>
+                    <br>
+                    <a id="footer-links" href="#" style="font-size: 10  px;"> &COPY 2022 Twitter,Inc.  </a>
+                    
+                  </footer>
+   
+      </div>
+    <!-- widgets ends -->
+
+    <!-- ... Your existing HTML ... -->
+
+<!-- ... Your existing HTML ... -->
+
+<script>
+
+//First like---------------
+var btn1=document.getElementById('btn1');  
+            function Toggle1(){
+              if(btn1.classList.contains("far")){
+              btn1.classList.remove("far");
+              btn1.classList.add("fas");
+              }
+              else{
+                btn1.classList.remove("fas");
+              btn1.classList.add("far");
+              }
+            }
+
+            //sec like---------------
+            var btn2=document.getElementById('btn2');  
+            function Toggle2(){
+              if(btn2.classList.contains("far")){
+              btn2.classList.remove("far");
+              btn2.classList.add("fas");
+              }
+              else{
+                btn2.classList.remove("fas");
+              btn2.classList.add("far");
+              }
+            }
+
+            //thrid like---------------
+            var btn3=document.getElementById('btn3');  
+            function Toggle3(){
+              if(btn3.classList.contains("far")){
+              btn3.classList.remove("far");
+              btn3.classList.add("fas");
+              }
+              else{
+                btn3.classList.remove("fas");
+              btn3.classList.add("far");
+              }
+            }
+
+            //Four like---------------
+            var btn4=document.getElementById('btn4');  
+            function Toggle4(){
+              if(btn4.classList.contains("far")){
+              btn4.classList.remove("far");
+              btn4.classList.add("fas");
+              }
+              else{
+                btn4.classList.remove("fas");
+              btn4.classList.add("far");
+              }
+            }
+            
+
+const tweetButton = document.querySelector(".box");
+  tweetButton.addEventListener("click", handleTweetSubmission);
+
+  // Function to handle tweet submission
+  function handleTweetSubmission() {
+    const tweetInput = document.querySelector(".messageSender__input");
+    const submittedTweets = document.getElementById("submittedTweet");
+
+    const tweetText = tweetInput.value.trim();
+
+    if (tweetText !== "") {
+      // Creates new tweet element
+      const tweetElement = document.createElement("div");
+      tweetElement.classList.add("submittedTweet__item");
+
+      // Create a span for the tweet text
+      const tweetTextSpan = document.createElement("span");
+      tweetTextSpan.classList.add("tweetText");
+      tweetTextSpan.textContent = tweetText;
+
+      // Append the tweet text and delete button to the tweet element
+      tweetElement.appendChild(tweetTextSpan);
+
+      const deleteButton = document.createElement("button");
+      deleteButton.classList.add("deleteButton");
+      deleteButton.textContent = "Delete";
+
+      tweetElement.appendChild(deleteButton);
+
+      // Append the tweet element to the submitted tweets container
+      submittedTweets.appendChild(tweetElement);
+
+      // Clear the tweet input
+      tweetInput.value = "";
+
+      // Attach event listener to the newly added delete button
+      deleteButton.addEventListener("click", handleDeleteTweet);
+    }
+  }
+
+  // Function to handle tweet deletion
+  function handleDeleteTweet(event) {
+    const tweetElement = event.currentTarget.parentElement;
+    tweetElement.remove();
+  }
+
+  </script>
+  
+
+  </body>
+</html>
